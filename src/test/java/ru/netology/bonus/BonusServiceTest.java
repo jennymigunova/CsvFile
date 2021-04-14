@@ -7,16 +7,15 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BonusServiceTest {
-  @ParameterizedTest
-  @CsvFileSource(resources = "/data.csv")
+    @ParameterizedTest
+    @CsvFileSource(resources = "/data.csv")
+    void shouldCalculate(String test, long amount, boolean registered, long expected) {
+        BonusService service = new BonusService();
 
-  void shouldCalculate(String test, long amount, boolean registered, long expected) {
-    BonusService service = new BonusService();
+        // вызываем целевой метод:
+        long actual = service.calculate(amount, registered);
 
-    // вызываем целевой метод:
-    long actual = service.calculate(amount, registered);
-
-    // производим проверку (сравниваем ожидаемый и фактический):
-    assertEquals(expected, actual);
-  }
+        // производим проверку (сравниваем ожидаемый и фактический):
+        assertEquals(expected, actual);
+    }
 }
